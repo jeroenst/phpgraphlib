@@ -1,4 +1,4 @@
-# PHPGraphLib Graphing Librar
+# PHPGraphLib Graphing Library
 
 ### PHPGraphLib is a lightweight PHP-based graphing library that creates slick PHP graphs for incorporation into a website or application.
 
