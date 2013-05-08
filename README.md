@@ -1,6 +1,6 @@
 # PHPGraphLib Graphing Librar
 
-## PHPGraphLib is a lightweight PHP-based graphing library that creates slick PHP graphs for incorporation into a website or application.
+### PHPGraphLib is a lightweight PHP-based graphing library that creates slick PHP graphs for incorporation into a website or application.
 
 PHPGraphLib is a PHP 4+ friendly object-oriented class that has powerful customization features, allowing you to generate the perfect bar, line, stacked bar, or pie graph for any application. Used with dynamic data, PHPGraphLib allows easy visual interpretation of sophisticated data sets. Simply feed PHPGraphLib an array of data points, and it will generate a .png chart of your data.
 
