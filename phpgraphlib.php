@@ -72,7 +72,7 @@ class PHPGraphLib {
 	var $bool_title_left = false;
 	var $bool_title_right = false;
 	var $bool_title_center = true;
-	var $x_axis_value_interval = 0;
+	var $x_axis_value_interval = false;
 	//----------internal variables (do not change)------------/
 	var $image;
 	var $output_file;
@@ -430,13 +430,20 @@ class PHPGraphLib {
 								$textVertPos = round($this->y_axis_y1 + (strlen($key) * $this->text_width) + $this->axis_value_padding);
 							}
 							$textHorizPos = round($xStart + ($this->bar_width / 2) - ($this->text_height / 2));
-							
-							if ($this->x_axis_value_interval_counter > $this->x_axis_value_interval) 
-							{
-								imagestringup($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
-								$this->x_axis_value_interval_counter = 0;
+					
+							//skip and dispplay every x intervals
+							if ($this->x_axis_value_interval) {
+								if ($this->x_axis_value_interval_counter < $this->x_axis_value_interval) {
+									$this->x_axis_value_interval_counter++;
+								}
+								else {
+									imagestringup($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+									$this->x_axis_value_interval_counter = 0;
+								}
 							}
-							$this->x_axis_value_interval_counter++;
+							else {
+								imagestringup($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+							}
 						}
 						else {
 							if ($this->bool_all_negative) {
@@ -450,7 +457,21 @@ class PHPGraphLib {
 							}
 							//horizontal data keys
 							$textHorizPos = round($xStart + ($this->bar_width / 2) - ((strlen($key) * $this->text_width) / 2));
-							imagestring($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+							
+							
+							//skip and dispplay every x intervals
+							if ($this->x_axis_value_interval) {
+								if ($this->x_axis_value_interval_counter < $this->x_axis_value_interval) {
+									$this->x_axis_value_interval_counter++;
+								}
+								else {
+									imagestring($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+									$this->x_axis_value_interval_counter = 0;
+								}
+							}
+							else {
+								imagestring($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+							}
 						}
 					}
 				}
@@ -1001,10 +1022,10 @@ class PHPGraphLib {
 		if (is_bool($bool)) { $this->bool_x_axis_values_vert = $bool; }
 		else { $this->error[] = "Boolean arg for setXValuesVertical() not specified properly."; }
 	}
-        function setXValuesInterval($value) {
-                if (is_int($value) and $value >= 0) { $this->x_axis_value_interval = $value; }
-                else { $this->error[] = "Value arg for setXValuesInterval() not specified properly."; }
-        }
+	function setXValuesInterval($value) {
+		if (is_int($value) and $value > 0) { $this->x_axis_value_interval = $value; }
+		else { $this->error[] = "Value arg for setXValuesInterval() not specified properly."; }
+	}
 	function setBarOutline($bool) {
 		if (is_bool($bool)) { $this->bool_bar_outline = $bool; }
 		else { $this->error[] = "Boolean arg for setBarOutline() not specified properly."; }
