@@ -72,6 +72,7 @@ class PHPGraphLib {
 	var $bool_title_left = false;
 	var $bool_title_right = false;
 	var $bool_title_center = true;
+	var $x_axis_value_interval = 0;
 	//----------internal variables (do not change)------------/
 	var $image;
 	var $output_file;
@@ -89,6 +90,7 @@ class PHPGraphLib {
 	var $bool_user_data_range = false;
 	var $all_zero_data = false;
 	var $bool_gradient_colors_found; //init as array
+	var $x_axis_value_interval_counter = 0;
 	//color vars
 	var $background_color;
 	var $grid_color;
@@ -428,7 +430,13 @@ class PHPGraphLib {
 								$textVertPos = round($this->y_axis_y1 + (strlen($key) * $this->text_width) + $this->axis_value_padding);
 							}
 							$textHorizPos = round($xStart + ($this->bar_width / 2) - ($this->text_height / 2));
-							imagestringup($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+							
+							if ($this->x_axis_value_interval_counter > $this->x_axis_value_interval) 
+							{
+								imagestringup($this->image, 2, $textHorizPos, $textVertPos, $key,  $this->x_axis_text_color);
+								$this->x_axis_value_interval_counter = 0;
+							}
+							$this->x_axis_value_interval_counter++;
 						}
 						else {
 							if ($this->bool_all_negative) {
@@ -993,6 +1001,10 @@ class PHPGraphLib {
 		if (is_bool($bool)) { $this->bool_x_axis_values_vert = $bool; }
 		else { $this->error[] = "Boolean arg for setXValuesVertical() not specified properly."; }
 	}
+        function setXValuesInterval($value) {
+                if (is_int($value) and $value >= 0) { $this->x_axis_value_interval = $value; }
+                else { $this->error[] = "Value arg for setXValuesInterval() not specified properly."; }
+        }
 	function setBarOutline($bool) {
 		if (is_bool($bool)) { $this->bool_bar_outline = $bool; }
 		else { $this->error[] = "Boolean arg for setBarOutline() not specified properly."; }
