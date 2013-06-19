@@ -72,8 +72,8 @@ class PHPGraphLibPie extends PHPGraphLib {
 	var $pie_data_array_percents;
 	var $pie_data_label_space;
 	var $pie_3D_height;
-	function PHPGraphLibPie($width = '', $height = '') {
-		PHPGraphLib::PHPGraphLib($width, $height);	
+	function PHPGraphLibPie($width = '', $height = '', $output_file = NULL) {
+		PHPGraphLib::PHPGraphLib($width, $height, $output_file);	
 	}
 	function initialize() {
 		PHPGraphLib::initialize();

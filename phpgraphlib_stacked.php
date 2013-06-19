@@ -36,8 +36,8 @@ THE SOFTWARE.
 
 */
 class PHPGraphLibStacked extends PHPGraphLib {
-	function PHPGraphLibStacked($width = '', $height = '') {
-		PHPGraphLib::PHPGraphLib($width,$height);	
+	function PHPGraphLibStacked($width = '', $height = '', $output_file = NULL) {
+		PHPGraphLib::PHPGraphLib($width, $height, $output_file);	
 	}
 	function generateBars() {
 		$this->finalizeColors();
@@ -201,9 +201,9 @@ class PHPGraphLibStacked extends PHPGraphLib {
 			$this->calcMinMax($min, $max);
 		}
 	}
-	function setLine() { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
-	function setDataPointSize() { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
-	function setDataPoints() { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
-	function setDataValues() { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
+	function setLine($bool) { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
+	function setDataPointSize($bool) { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
+	function setDataPoints($bool) { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
+	function setDataValues($bool) { $this->error[] = __function__ . '() function not allowed in PHPGraphLib Stacked extension.'; }
 }
 ?>
