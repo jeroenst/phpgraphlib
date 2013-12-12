@@ -189,17 +189,23 @@ class PHPGraphLibPie extends PHPGraphLib {
 			$arcStart = 0;
 			foreach ($this->pie_data_array_percents as $key => $value) {
 				$color = $this->generateNextColor(true); //GENERATE A DARKER VERSION OF THE INDEXED COLOR
-				imagefilledarc($this->image, $this->pie_center_x, $i, $this->pie_width, $this->pie_height, $arcStart, (360 * $value) + $arcStart, $color, IMG_ARC_PIE);
-				$arcStart += 360*$value;
+				// DO NOT DRAW IF THE VALUE IS ZERO
+				if (! $value == 0){
+					imagefilledarc($this->image, $this->pie_center_x, $i, $this->pie_width, $this->pie_height, $arcStart, (360 * $value) + $arcStart, $color, IMG_ARC_PIE);
+					$arcStart += 360*$value;
+				}
 			}
 			$this->resetColorPointer();
 		}
 		$arcStart = 0;	
 		foreach ($this->pie_data_array_percents as $key => $value) {
 			$color = $this->generateNextColor();
-			imagefilledarc($this->image, $this->pie_center_x, $this->pie_center_y, $this->pie_width, $this->pie_height, $arcStart, (360*$value)+$arcStart, $color, IMG_ARC_PIE);
+			// DO NOT DRAW IF THE VALUE IS ZERO
+			if (! $value == 0){
+				imagefilledarc($this->image, $this->pie_center_x, $this->pie_center_y, $this->pie_width, $this->pie_height, $arcStart, (360*$value)+$arcStart, $color, IMG_ARC_PIE);
+				$arcStart += 360 * $value;
+			}
 			if ($this->bool_data_labels) { $this->generateDataLabel($value, $arcStart); }
-			$arcStart += 360 * $value;
 		}
 	}
 	function generateDataLabel($value, $arcStart) {
