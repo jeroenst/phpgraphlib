@@ -16,7 +16,7 @@ Documentation is available at [http://www.ebrueggeman.com/phpgraphlib](http://ww
 
 ### Examples
 
-Within the [Examples](../examples) directory are examples of PHPGraphLib usage. Git clone this repo to a directory on your localhost or server to see these examples in action.
+Within the [Examples](/examples) directory are examples of PHPGraphLib usage. Git clone this repo to a directory on your localhost or server to see these examples in action.
 
 ![PHPGraphLib Graph Example](http://www.ebrueggeman.com/sites/www.ebrueggeman.com/files/images/phpgraphlib_example_graph.png)
 
