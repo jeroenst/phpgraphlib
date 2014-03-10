@@ -221,7 +221,7 @@ class PHPGraphLibPie extends PHPGraphLib
 	protected function generateDataLabel($value, $arcStart) 
 	{
 		//midway if the mid arc angle of the wedge we just drew
-		$midway = ($arcStart + (360 * $value) + $arcStart) / 2;
+		$midway = ($arcStart - (180 * $value));
 		//adjust for ellipse height/width ratio
 		$skew = self::PIE_HEIGHT_PERCENT / self::PIE_WIDTH_PERCENT;
 		$pi = atan(1.0) * 4.0;
