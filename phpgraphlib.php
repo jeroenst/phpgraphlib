@@ -1,6 +1,6 @@
 <?php 
 
-/**
+/*
 
 PHPGraphLib Graphing Library
 
@@ -94,6 +94,7 @@ class PHPGraphLib {
 	protected $bool_title_center = true;
 	protected $bool_background = false;
 	protected $bool_title = false;
+	protected $bool_ignore_errors = false;
 	protected $data_point_width = 6;
 	protected $x_axis_value_interval = false;
 	
@@ -280,14 +281,14 @@ class PHPGraphLib {
 	protected function setupData()
 	{
 		$unit_width = ($this->width - $this->y_axis_margin - $this->right_margin) / (($this->data_count * 2) + $this->data_count);
-		if ($unit_width < 1) {	
+		if ($unit_width < 1 && !$this->bool_ignore_errors) {	
 			//error units too small, too many data points or not large enough graph
 			$this->bool_bars_generate = false;
 			$this->error[] = "Graph too small or too many data points.";
 		} else {
 			//default space between bars is 1/2 the width of the bar
 			//find bar and space widths. bar = 2 units, space = 1 unit
-			$this->bar_width= 2 * $unit_width;
+			$this->bar_width = 2 * $unit_width;
 			$this->space_width = $unit_width;
 			//now calculate height (scale) units
 			$availVertSpace = $this->height - $this->x_axis_margin - $this->top_margin;	
@@ -1181,11 +1182,11 @@ class PHPGraphLib {
 	{
 		switch (strtolower($currency_type)) {
 			case 'dollar': $this->data_currency = '$'; break;
-			case 'yen': $this->data_currency = '¥'; break;
-			case 'pound': $this->data_currency = '£'; break;
-			case 'lira': $this->data_currency = '£'; break;
+			case 'yen': $this->data_currency = 'Â¥'; break;
+			case 'pound': $this->data_currency = 'Â£'; break;
+			case 'lira': $this->data_currency = 'Â£'; break;
 			/* Euro doesn't display properly...
-			case 'euro': $this->data_currency = '€'; break; */
+			case 'euro': $this->data_currency = 'â‚¬'; break; */
 			/* Franc doesn't display properly
 			case 'franc': $this->data_currency = '?'; break; */
 			default: $this->data_currency = $currency_type; break;
@@ -1266,7 +1267,7 @@ class PHPGraphLib {
 
 	protected function formatDataAsDegrees($input)
 	{
-		return $input . '°';
+		return $input . 'Â°';
 	}
 
 	protected function formatDataAsGeneric($input)
@@ -1591,5 +1592,14 @@ class PHPGraphLib {
 			imagerectangle($this->image, $xValue, $yValue + $swatchToTextOffset, $xValue + $swatchSize, $yValue + $swatchToTextOffset + $swatchSize, $this->legend_swatch_outline_color);	
 			imagestring($this->image, 2, $xValue + (2 * self::LEGEND_PADDING + 2), $yValue, $data_label, $this->legend_text_color);
 		}
+	}
+
+	public function setIgnoreErrors($bool) 
+	{
+		if (is_bool($bool)) {
+			$this->bool_ignore_errors = $bool;
+		} else { 
+			$this->error[] = "Boolean arg for setIgnoreErrors() not specified properly.";
+		}	
 	}
 }
