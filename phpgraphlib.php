@@ -113,7 +113,7 @@ class PHPGraphLib {
 	protected $bool_gradient_colors_found = array();
 	protected $bool_y_axis_setup = false;
 	protected $bool_x_axis_setup = false;
-	protected $x_axis_value_interval_counter = 0;
+	protected $x_axis_value_interval_counter = -1;
 
 	//color vars
 	protected $background_color;
