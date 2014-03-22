@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 
 /*
 
@@ -94,7 +94,7 @@ class PHPGraphLib {
 	protected $bool_title_center = true;
 	protected $bool_background = false;
 	protected $bool_title = false;
-	protected $bool_ignore_errors = false;
+	protected $bool_ignore_data_fit_errors = false;
 	protected $data_point_width = 6;
 	protected $x_axis_value_interval = false;
 	
@@ -113,7 +113,7 @@ class PHPGraphLib {
 	protected $bool_gradient_colors_found = array();
 	protected $bool_y_axis_setup = false;
 	protected $bool_x_axis_setup = false;
-	protected $x_axis_value_interval_counter = -1;
+	protected $x_axis_value_interval_counter = 0;
 
 	//color vars
 	protected $background_color;
@@ -281,7 +281,7 @@ class PHPGraphLib {
 	protected function setupData()
 	{
 		$unit_width = ($this->width - $this->y_axis_margin - $this->right_margin) / (($this->data_count * 2) + $this->data_count);
-		if ($unit_width < 1 && !$this->bool_ignore_errors) {	
+		if ($unit_width < 1 && !$this->bool_ignore_data_fit_errors) {	
 			//error units too small, too many data points or not large enough graph
 			$this->bool_bars_generate = false;
 			$this->error[] = "Graph too small or too many data points.";
@@ -1594,12 +1594,12 @@ class PHPGraphLib {
 		}
 	}
 
-	public function setIgnoreErrors($bool) 
+	public function setIgnoreDataFitErrors($bool) 
 	{
 		if (is_bool($bool)) {
-			$this->bool_ignore_errors = $bool;
+			$this->bool_ignore_data_fit_errors = $bool;
 		} else { 
-			$this->error[] = "Boolean arg for setIgnoreErrors() not specified properly.";
+			$this->error[] = "Boolean arg for setIgnoreDataFitErrors() not specified properly.";
 		}	
 	}
 }
