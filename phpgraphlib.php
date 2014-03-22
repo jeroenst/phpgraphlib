@@ -1,4 +1,4 @@
-﻿<?php 
+<?php
 
 /*
 
@@ -1179,20 +1179,20 @@ class PHPGraphLib {
 	}
 
 	public function setDataCurrency($currency_type = 'dollar')
-	{
-		switch (strtolower($currency_type)) {
-			case 'dollar': $this->data_currency = '$'; break;
-			case 'yen': $this->data_currency = '¥'; break;
-			case 'pound': $this->data_currency = '£'; break;
-			case 'lira': $this->data_currency = '£'; break;
-			/* Euro doesn't display properly...
-			case 'euro': $this->data_currency = '€'; break; */
-			/* Franc doesn't display properly
-			case 'franc': $this->data_currency = '?'; break; */
-			default: $this->data_currency = $currency_type; break;
-		}
-		$this->data_additional_length += strlen($this->data_currency);
-	}
+        {
+            switch (strtolower($currency_type)) {
+                case 'dollar': $this->data_currency = '$'; break;
+                case 'yen': $this->data_currency = '?'; break;
+                case 'pound': $this->data_currency = '?'; break;
+                case 'lira': $this->data_currency = '?'; break;
+                /* Euro doesn't display properly...
+                case 'euro': $this->data_currency = '�'; break; */
+                /* Franc doesn't display properly
+                case 'franc': $this->data_currency = '?'; break; */
+                default: $this->data_currency = $currency_type; break;
+            }
+            $this->data_additional_length += strlen($this->data_currency);
+        }
 
 	protected function applyDataCurrency($input)
 	{
@@ -1267,7 +1267,7 @@ class PHPGraphLib {
 
 	protected function formatDataAsDegrees($input)
 	{
-		return $input . '°';
+		return $input . '�';
 	}
 
 	protected function formatDataAsGeneric($input)
